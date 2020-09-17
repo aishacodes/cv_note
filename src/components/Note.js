@@ -9,8 +9,11 @@ export default ({list, display}) => {
           const note = list[noteId]
           return (
             <div key={noteId} className="notelist" onClick={()=> display(note.title, note.content)}>
-              <span className="note-title">{note.title} </span>
-              <span>{note.dateCreated}</span>
+              <span className="col" style={{background: note.color}}></span>
+              <div className="ntt">
+                <span className="note-title">{note.title} </span>
+                <span>{note.dateCreated}</span>
+              </div>
             </div>
             
           )

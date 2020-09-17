@@ -36,16 +36,38 @@ body{
   padding: .2rem 0;
   font-size: 1rem;
 }
-
-
-.notelist{
-  width: 90%;
+.notelists{
   display: flex;
   flex-direction: column;
+
+}
+
+.notelist{
+  padding: 1rem;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  background-color: #FAFAFA;
+  border-bottom:  1px solid #BEBEBE;
+}
+.notelist .ntt{
+  display: flex;
+  flex-direction: column;
+  margin-left: .7rem;
+}
+
+.notelist span.col{
+  width: 1.2rem;
+  height: 1.2rem;
 }
 .notelist span.note-title{
   font-size: 1rem;
   padding-bottom: .3rem;
+}
+.notelist .ntt span:last-child{
+  font-size: .8rem;
+  font-weight: lighter;
+  color: #BEBEBE;
 }
 .mainContent {
   display: grid;

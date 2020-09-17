@@ -4,14 +4,24 @@ import Note from './components/Note';
 
 const generateId = (length = 4) => Math.random().toString(36).substring(2, 2 + length);
 
+const Timee = (timeStamp) => {
+
+  const days = 'Sunday Monday Tuesday Wednesday Thursday Friday Saturday'.split(" ")
+  const months = 'January February March April May June July August September October November December'.split(" ")
+
+  const now = new Date(timeStamp);
+
+  return `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()} at ${now.toLocaleTimeString()}`
+}
 const defaultNote = {}
 
 defaultNote[generateId()] = {
   title: 'First day at work',
   content: 'lorem ipsum',
   color: 'rgba(255,255,255)', 
-  dateCreated: Date.now()
+  dateCreated: Timee(Date.now())
 }
+
 const App = () => {
   const [note, setNote] = useState(defaultNote)
   const[color, setColor] = useState('rgba(255,255,255)')
