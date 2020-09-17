@@ -49,6 +49,7 @@ body{
   align-items: center;
   background-color: #FAFAFA;
   border-bottom:  1px solid #BEBEBE;
+  cursor: pointer;
 }
 .notelist .ntt{
   display: flex;
@@ -90,8 +91,11 @@ form{
   color: #C4C4C4;
   outline: none;
   border: none;
-  font-size: 24px;
+  font-size: 18px;
   margin-top: 1rem;
+}
+.input-con input{
+  font-size: 24px;
 }
 .bg{
   margin-top: .5rem ;
@@ -112,6 +116,25 @@ img[alt="mark"]{
 .shownote{
   margin-top: 1rem;
   height: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+}
+.shownote .det{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 3rem;
+}
+.shownote .det p{
+  font-size: 1.3rem;
+  margin-bottom: .5rem;
+}
+.shownote .det span{
+  font-weight: lighter;
+  font-size: .8rem;
+}
+.shownote span.con{
+  font-weight: lighter;
 }
 button{
   outline: none;

@@ -25,7 +25,7 @@ defaultNote[generateId()] = {
 const App = () => {
   const [note, setNote] = useState(defaultNote)
   const[color, setColor] = useState('rgba(255,255,255)')
-  const [display, setDisplay] = useState({title: 'First day at work',content: 'lorem ipsum',})
+  const [display, setDisplay] = useState({title: 'First day at work',content: 'lorem ipsum', dateCreated: Timee(Date.now())})
 
 const addNote = (ev) =>{
   ev.preventDefault()
@@ -36,7 +36,7 @@ const addNote = (ev) =>{
   noteOb[generateId()] = {
     title: title,
     content: content,
-    dateCreated: Date.now()
+    dateCreated: Timee(Date.now())
   }
   setNote({
     ...note,
@@ -44,11 +44,12 @@ const addNote = (ev) =>{
   })
 }
 
-const displayCon = (title, content) => {
+const displayCon = (title, content, dateCreated) => {
     setDisplay({
       ...display,
         title,
-        content
+        content,
+        dateCreated
     })
 }
 
@@ -95,8 +96,11 @@ const InputTab =() => {
     
     return (
     <div className="shownote" style= {{background: color}} >
-      <p className="title">{display.title}</p>
-    <span>{display.content}</span>
+      <div className="det">
+        <p className="title">{display.title}</p>
+        <span>{display.dateCreated}</span>
+      </div>
+      <span className="con">{display.content}</span>
     </div>
     )
   }
