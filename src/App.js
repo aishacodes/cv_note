@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import Note from './components/Note';
 
 const generateId = (length = 4) => Math.random().toString(36).substring(2, 2 + length);
 
@@ -14,31 +15,7 @@ defaultNote[generateId()] = {
 const App = () => {
   const [note, setNote] = useState(defaultNote)
   const[color, setColor] = useState('rgba(255,255,255)')
-  
-const Note = ({list}) => (
-  <div className="notelists">
-    {
-      Object.keys(list).map(noteId => {
-        const note = list[noteId]
-        return (
-          <div key={noteId} className="notelist">
-            <span className="note-title">{note.title} </span>
-            <span>{note.dateCreated}</span>
-          </div>
-        )
-      })
-    }
-  </div>
-)
-
-
-// const handleChange = (evt) => {
-//   const value = evt.target.value;
-//   setNote({
-//     ...note,
-//     [evt.target.name]: value
-//   });
-// }
+  const [display, setDisplay] = useState({title: 'First day at work',content: 'lorem ipsum',})
 
 const addNote = (ev) =>{
   ev.preventDefault()
@@ -57,6 +34,15 @@ const addNote = (ev) =>{
   })
 }
 
+const displayCon = (title, content) => {
+    setDisplay({
+      ...display,
+        title,
+        content
+    })
+}
+
+
 const Sidebar = () => {
 
   return (  
@@ -66,13 +52,12 @@ const Sidebar = () => {
         <img src="/asset/search.svg" alt="search" />
         <input type="text" /> 
       </div>
-      <Note list={note} className="noteTitles" />
+      <Note list={note} display={displayCon} className="noteTitles" />
     </div>
   )
 }
 
 const MainContent = () =>{
-
 
 const InputTab =() => {  
   
@@ -96,10 +81,13 @@ const InputTab =() => {
   
   }
 
-  const ShowNote =() => {
+  const ShowNote =() => {                             
     
     return (
-      <div className="shownote" jey style= {{background: color}} > hee</div>
+    <div className="shownote" style= {{background: color}} >
+      <p className="title">{display.title}</p>
+    <span>{display.content}</span>
+    </div>
     )
   }
 

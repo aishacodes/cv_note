@@ -9,7 +9,7 @@ body{
 }
 .App{
   display: grid;
-  grid-template-columns: 30% 1fr;
+  grid-template-columns: 25% 1fr;
 
 }
 .Sidebar h1{
