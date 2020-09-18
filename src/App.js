@@ -23,6 +23,7 @@ defaultNote[generateId()] = {
 }
 
 const App = () => {
+  const [searchString, setSearchString] = useState('')
   const [note, setNote] = useState(defaultNote)
   const[color, setColor] = useState('rgba(255,255,255)')
   const [display, setDisplay] = useState({title: 'First day at work',content: 'lorem ipsum', dateCreated: Timee(Date.now())})
@@ -31,7 +32,6 @@ const addNote = (ev) =>{
   ev.preventDefault()
   const title = ev.target.title.value
   const content = ev.target.content.value
-
   const noteOb = {}
   noteOb[generateId()] = {
     title: title,
@@ -54,16 +54,39 @@ const displayCon = (title, content, dateCreated) => {
 }
 
 
+
+
+const SearchBox = ({handleInput}) => {
+  return(
+    <form>
+        <div className="search">
+        <img src="/asset/search.svg" alt="search" />
+        <input type="search" placeholder="Search notes"  onChange={handleInput}/>
+        </div>
+    </form>
+  )
+}
+
+const filterNote = () => {
+  const filtered ={}
+  Object.keys(note).forEach(id=> {
+    const notee = note[id]
+
+    if((notee.title.indexOf(searchString) > -1) || (notee.content.indexOf(searchString)>-1 )
+    ){
+      filtered[id] = notee
+    }
+  })
+    return filtered
+}
+
 const Sidebar = () => {
 
   return (  
     <div className="Sidebar">
       <h1>CV Note</h1>
-      <div className="search">
-        <img src="/asset/search.svg" alt="search" />
-        <input type="text" /> 
-      </div>
-      <Note list={note} display={displayCon} className="noteTitles" />
+      <SearchBox handleInput={(ev) => setSearchString(ev.target.value)}/>
+      <Note list= {searchString ? filterNote() : note} display={displayCon} className="noteTitles" />
     </div>
   )
 }
@@ -75,8 +98,8 @@ const InputTab =() => {
     return (
         <div className = "input-con">
           <form id="my-form" onSubmit={addNote}>
-            <input type="text" placeholder="Title" name="title" />
-            <textarea rows="3" name="content" placeholder="Type your note" /> 
+            <input type="text" placeholder="Title" name="title" required />
+            <textarea rows="3" name="content" placeholder="Type your note" required /> 
           </form>
             <div className="bg">
               <div className="colors">
@@ -105,16 +128,13 @@ const InputTab =() => {
     )
   }
 
- return (
-  
+ return ( 
   <div>
     <InputTab />
     <ShowNote />
   </div>  
 )
 }
-
-
 
   return (
     <div className="App">

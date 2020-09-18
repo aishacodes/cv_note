@@ -135,6 +135,7 @@ img[alt="mark"]{
 }
 .shownote span.con{
   font-weight: lighter;
+  line-height: 1.5rem;
 }
 button{
   outline: none;
