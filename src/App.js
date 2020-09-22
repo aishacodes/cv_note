@@ -21,11 +21,12 @@ defaultNote[generateId()] = {
   color: 'rgba(255,255,255)', 
   dateCreated: Timee(Date.now())
 }
+const colors = '#a0d7e3 #dec5f2 #f6eb92 #ffffff'.split(' ')
+
 
 const App = () => {
   const [searchString, setSearchString] = useState('')
   const [note, setNote] = useState(defaultNote)
-  const[color, setColor] = useState('rgba(255,255,255)')
   const [display, setDisplay] = useState({title: 'First day at work',content: 'lorem ipsum', dateCreated: Timee(Date.now())})
 
 const addNote = (ev) =>{
@@ -103,10 +104,11 @@ const InputTab =() => {
           </form>
             <div className="bg">
               <div className="colors">
-                <img src="/asset/blue.svg" alt="blue" onClick={(() => setColor('rgba(37, 172, 202)') ) }/>
-                <img src="/asset/purple.svg" alt="purple"  onClick={(() => setColor('rgba(129, 37, 202)') ) }/>
-                <img src="/asset/yelow.svg" alt="yellow"  onClick={(() => setColor('rgba(202, 185, 37)') ) } />
-                <img src="/asset/white.svg" alt="white" onClick={(() => setColor('rgba(255, 255, 255)') ) } />
+              {
+            colors.map(color => <p className="color" style={{backgroundColor: color}} key={`new-color-${color}`}/>
+            )
+          }
+         
               </div>
               <button type="submit" form="my-form"><img src="/asset/mark.svg" alt="mark" /></button>
             </div>
@@ -118,7 +120,7 @@ const InputTab =() => {
   const ShowNote =() => {                             
     
     return (
-    <div className="shownote" style= {{background: color}} >
+    <div className="shownote"  >
       <div className="det">
         <p className="title">{display.title}</p>
         <span>{display.dateCreated}</span>

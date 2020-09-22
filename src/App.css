@@ -102,10 +102,15 @@ form{
   display: flex;
   justify-content: space-between;
 }
-.colors img{
-  width: 29px;
-  height: 29px;
-  margin-right:.6rem ;
+.colors {
+  display: flex;
+  align-items: center;
+}
+.colors p.color {
+  width: 1rem;
+  height: 1rem;
+  margin: 0 .25rem;
+  border: 2px solid gray;
 }
 img[alt="mark"]{
   width: 49px;
