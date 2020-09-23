@@ -25,8 +25,10 @@ const colors = '#a0d7e3 #dec5f2 #f6eb92 #ffffff'.split(' ')
 
 
 const App = () => {
-  const [searchString, setSearchString] = useState('')
   const [note, setNote] = useState(defaultNote)
+  const [selectedColor, setSelectedColor] = useState(colors[0])
+  const [filteredNotes, setFilteredNotes] = useState(null);
+
   const [display, setDisplay] = useState({title: 'First day at work',content: 'lorem ipsum', dateCreated: Timee(Date.now())})
 
 const addNote = (ev) =>{
@@ -55,39 +57,43 @@ const displayCon = (title, content, dateCreated) => {
 }
 
 
-
-
-const SearchBox = ({handleInput}) => {
-  return(
-    <form>
+const SearchBox = ({handleInput}) => (
+    <form onSubmit={e => e.preventDefault()}>
         <div className="search">
         <img src="/asset/search.svg" alt="search" />
-        <input type="search" placeholder="Search notes"  onChange={handleInput}/>
+        <input type="search" name="search" placeholder="Search notes"  onChange={handleInput}/>
         </div>
     </form>
   )
-}
 
-const filterNote = () => {
-  const filtered ={}
-  Object.keys(note).forEach(id=> {
-    const notee = note[id]
 
-    if((notee.title.indexOf(searchString) > -1) || (notee.content.indexOf(searchString)>-1 )
-    ){
-      filtered[id] = notee
-    }
+const filterNotes = (e) => {
+  const query = e.target.value.toLowerCase();
+
+  if (!query) return;
+
+  const filtered = {}
+  Object.keys(note).forEach(noteId => {
+    const notte = note[noteId]
+
+    if (notte.title.toLowerCase().indexOf(query) > -1 ||
+    notte.content.toLowerCase().indexOf(query) > -1) filtered[noteId] = notte
   })
-    return filtered
-}
+
+  if (Object.keys(filtered).length) {
+    setFilteredNotes(filtered);
+  } else {
+    setFilteredNotes(null);
+  }
+};
 
 const Sidebar = () => {
 
   return (  
     <div className="Sidebar">
       <h1>CV Note</h1>
-      <SearchBox handleInput={(ev) => setSearchString(ev.target.value)}/>
-      <Note list= {searchString ? filterNote() : note} display={displayCon} className="noteTitles" />
+      <SearchBox handleInput={filterNotes}/>
+      <Note list= {filteredNotes || note} display={displayCon} className="noteTitles" />
     </div>
   )
 }
@@ -105,7 +111,7 @@ const InputTab =() => {
             <div className="bg">
               <div className="colors">
               {
-            colors.map(color => <p className="color" style={{backgroundColor: color}} key={`new-color-${color}`}/>
+            colors.map(color => <p className={`color ${color === selectedColor ? 'selected': ''}`} style={{backgroundColor: color}} key={`new-color-${color}`} onClick={() => setSelectedColor(color)}/>
             )
           }
          
