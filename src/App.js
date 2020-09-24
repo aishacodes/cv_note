@@ -13,20 +13,20 @@ const Timee = (timeStamp) => {
 
   return `${months[now.getMonth()]} ${now.getDate()}, ${now.getFullYear()} at ${now.toLocaleTimeString()}`
 }
+const colors = '#a0d7e3 #dec5f2 #f6eb92 #ffffff'.split(' ')
 const defaultNote = {}
 
 defaultNote[generateId()] = {
   title: 'First day at work',
   content: 'lorem ipsum',
-  color: 'rgba(255,255,255)', 
+  color: colors[0], 
   dateCreated: Timee(Date.now())
 }
-const colors = '#a0d7e3 #dec5f2 #f6eb92 #ffffff'.split(' ')
 
 
 const App = () => {
   const [note, setNote] = useState(defaultNote)
-  const [selectedColor, setSelectedColor] = useState(colors[0])
+  const [selectedColor, setSelectedColor] = useState(colors[1])
   const [filteredNotes, setFilteredNotes] = useState(null);
 
   const [display, setDisplay] = useState({title: 'First day at work',content: 'lorem ipsum', dateCreated: Timee(Date.now())})
@@ -114,7 +114,6 @@ const InputTab =() => {
             colors.map(color => <p className={`color ${color === selectedColor ? 'selected': ''}`} style={{backgroundColor: color}} key={`new-color-${color}`} onClick={() => setSelectedColor(color)}/>
             )
           }
-         
               </div>
               <button type="submit" form="my-form"><img src="/asset/mark.svg" alt="mark" /></button>
             </div>

@@ -112,7 +112,7 @@ form{
   margin: 0 .25rem;
   border: 2px solid gray;
 }
-.color .selected {
+.colors .color.selected {
   border-color: black;
 }
 img[alt="mark"]{
